@@ -1,35 +1,35 @@
 function getDet(mat) {
     let det = 0;
-    if (mat.length > 1 ) {
-        console.log(mat)
-        det+= mat[0][0]*mat[1][1]-mat[1][0]*mat[0][1]
+    if (mat.length > 2 ) {
+        for (const i in mat) {
+            console.log({i,mat})
+            console.log(copyMat(mat,i))
+            det+= mat[0][i]*Math.pow(-1,i) * getDet(copyMat(mat,i))
+        }
     }else {
-        return mat
+        return mat[0][0]*mat[1][1]-mat[1][0]*mat[0][1]
     }
-    console.log(det)
     return det;
 }
 
-function copyMat(mat, n, m) {
+function copyMat(mat, column) {
     let newmat = new Array();
     let w = 0;
-    for (let i = 0; i < mat.length; i++) {
-        if(i != n){
-            let x = 0;
-            newmat[w] = new Array();
-            for (let j = 0; j < mat.length; j++) {
-                if(j != m){
-                    newmat[w][x] = mat[i][j];
-                    x++;
-                }
+    for (let i = 1; i < mat.length; i++) {
+        let x = 0;
+        newmat[w] = new Array();
+        for (let j = 0; j < mat.length; j++) {
+            if (j != column) {
+                newmat[w][x] = mat[i][j];
+                x++;
             }
-            w++
         }
+        w++
     }
     return newmat
 }
 
-hacerCalc = function (){
+function hacerCalc(){
     let matrix = new Array();
     let inputs = document.getElementsByClassName("matInput");
     l = + document.querySelector("input").value

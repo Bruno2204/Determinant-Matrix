@@ -2,8 +2,6 @@ function getDet(mat) {
     let det = 0;
     if (mat.length > 2 ) {
         for (const i in mat) {
-            console.log({i,mat})
-            console.log(copyMat(mat,i))
             det+= mat[0][i]*Math.pow(-1,i) * getDet(copyMat(mat,i))
         }
     }else {
